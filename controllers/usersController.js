@@ -1,6 +1,5 @@
 
 
-import { Service } from '../service/testService.js'
 export class TestController {
 
     async getTest(req, res, next) {
