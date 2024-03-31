@@ -1,5 +1,5 @@
 import { getUsersQuery,getUserByIdQuery } from "./usersQueries.js"
-
+import {executeQuery} from './db.js'
 export class UsersService {
 
     async getUsers() {
@@ -8,15 +8,15 @@ export class UsersService {
         return result;
     }
 
-    async getUsersById(id) {
+    async getUserById(id) {
         const queryUsers = getUserByIdQuery();
         const result =  await executeQuery(queryUsers, [id]);
         return result;
     }
 
-    async addTest(testItem) {
-        // call db add item
+    // async addTest(testItem) {
+    //     // call db add item
 
-    }
+    // }
 }
 
