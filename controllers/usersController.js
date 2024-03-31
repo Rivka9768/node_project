@@ -9,7 +9,7 @@ export class UserController {
             const usersService = new UsersService();
             
             const resultItems = await usersService.getUsers();
-            console.log("hi")
+         
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -35,19 +35,20 @@ export class UserController {
     }
 
 
-    // async addTest(req, res) {
-    //     try {
-    //         const testService = new TestService();
-    //          await testService.addTest(req.body);
-    //         res.status(200).json({ status: 200 });
-    //     }
-    //     catch (ex) {
-    //         const err = {}
-    //         err.statusCode = 500;
-    //         err.message = ex;
-    //         next(err)
-    //     }
-    // }
+    async addUser(req, res) {
+        try {
+            const usersService = new UsersService();
+           
+           await usersService.addUser(req.body);
+            res.status(200).json({ status: 200 });
+        }
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            // next(err)
+        }
+    }
 
 
     // async deleteTest(req, res) {

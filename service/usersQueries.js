@@ -10,7 +10,12 @@ const getUserByIdQuery=()=> {
     return query
 }
 
+const addUserQuery=()=> {
+    const query =`INSERT INTO nodeproject.users (id,name,username,email,street,suite,city
+        ,zipcode,lat,lng,phone,website,companyName,catchPhrase,bs) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    return query
+}
 
 export {
-    getUsersQuery, getUserByIdQuery
+    getUsersQuery, getUserByIdQuery,addUserQuery
 }
