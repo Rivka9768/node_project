@@ -15,7 +15,7 @@ export class UsersService {
     }
 
     async addUser(userItem) {
-        const queryUsers = addUserQuery();
+        const queryUsers = addUserQuery('users',userItem);
         const result = await executeQuery(queryUsers, [...Object.values(userItem)]);
         return result;
     }
@@ -26,7 +26,7 @@ export class UsersService {
     }
 
     async updateUser(userItem, userId) {
-        const queryUsers = updateUserQuery();
+        const queryUsers = updateUserQuery('users',userItem);
         const result = await executeQuery(queryUsers, [...Object.values(userItem), userId]);
         return result;
     }

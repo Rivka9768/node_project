@@ -1,13 +1,16 @@
 
 
-import { UsersService } from "../service/usersService.js";
-export class UserController {
+import { Service } from "../service/services.js";
+export class TodosController {
 
-    async getUsers(req, res, next) {
+    async getTodosByUserId(req, res, next) {
+
         try {
-
-            const usersService = new UsersService();
-            const resultItems = await usersService.getUsers();
+            const todosService = new Service();
+            console.log(req.query.userId); 
+            if(req.query.userId===undefined)
+                throw new Error('illegal request')
+            const resultItems = await todosService.get('todos',req.query.userId);
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -18,10 +21,10 @@ export class UserController {
         }
     }
 
-    async getUserById(req, res,next) {
+    async getTodoById(req, res,next) {
         try {
-            const usersService = new UsersService();
-            const resultItem = await usersService.getUserById(req.params.id);
+            const todosService = new Service();
+            const resultItem = await todosService.getById('todos',req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -33,10 +36,10 @@ export class UserController {
     }
 
 
-    async addUser(req, res,next) {
+    async addTodo(req, res,next) {
         try {
-            const usersService = new UsersService();
-           await usersService.addUser(req.body);
+            const todosService = new Service();
+           await todosService.add('todos',req.body);
             res.status(200).json({ status: 200 });
         }
         catch (ex) {
@@ -48,10 +51,10 @@ export class UserController {
     }
 
 
-    async deleteUser(req, res,next) {
+    async deleteTodo(req, res,next) {
         try {
-            const usersService = new UsersService();
-            await usersService.deleteUser(req.params.id);
+            const todosService = new Service();
+            await todosService.delete('todos',req.params.id);
              res.status(200).json({ status: 200 });
             // console.log("test");
             // console.log(req.params.id);
@@ -65,10 +68,10 @@ export class UserController {
         }
     }
 
-    async updateUser(req, res,next) {
+    async updateTodo(req, res,next) {
         try {
-            const usersService = new UsersService();
-            await usersService.updateUser(req.body,req.params.id);
+            const todosService = new Service();
+            await todosService.update('todos',req.body,req.params.id);
              res.status(200).json({ status: 200 })
             // console.log("test");
             // console.log(req.params.id);
