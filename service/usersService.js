@@ -1,4 +1,4 @@
-import { getUsersQuery, getUserByIdQuery, addUserQuery } from "./usersQueries.js"
+import { getUsersQuery, getUserByIdQuery, addUserQuery, deleteUserQuery, updateUserQuery } from "./usersQueries.js"
 import { executeQuery } from './db.js'
 export class UsersService {
 
@@ -15,48 +15,19 @@ export class UsersService {
     }
 
     async addUser(userItem) {
-        console.log(userItem.id)
         const queryUsers = addUserQuery();
+        const result = await executeQuery(queryUsers, [...Object.values(userItem)]);
+        return result;
+    }
+    async deleteUser(id) {
+        const queryUsers = deleteUserQuery();
+        const result = await executeQuery(queryUsers, [id]);
+        return result;
+    }
 
-
-        console.log("jhhhh")
-        const { id,    name , username
-            , email
-
-            , street
-            , suite
-            , city
-            , zipcode
-
-            , lat
-            , lng
-
-
-            , phone
-            , website
-
-            , companyName
-            , catchPhrase
-            , bs }=userItem;
-        const result = await executeQuery(queryUsers, [ id,    name , username
-            , email
-
-            , street
-            , suite
-            , city
-            , zipcode
-
-            , lat
-            , lng
-
-
-            , phone
-            , website
-
-            , companyName
-            , catchPhrase
-            , bs]);
-        console.log("jjjj")
+    async updateUser(userItem, userId) {
+        const queryUsers = updateUserQuery();
+        const result = await executeQuery(queryUsers, [...Object.values(userItem), userId]);
         return result;
     }
 }
