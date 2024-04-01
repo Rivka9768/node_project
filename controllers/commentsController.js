@@ -1,16 +1,15 @@
 
 
 import { Service } from "../service/services.js";
-export class TodosController {
+export class CommentsController {
 
-    async getTodosByUserId(req, res, next) {
+    async getCommentsByPostId(req, res, next) {
 
         try {
-            const todosService = new Service();
-            console.log(req.query.userId); 
-            if(req.query.userId===undefined)
+            const commentsService = new Service();
+            if (req.query.postId === undefined)
                 throw new Error('illegal request')
-            const resultItems = await todosService.get('todos',{key:'userId',value:req.query.userId});
+            const resultItems = await commentsService.get('comments', {key:'postId',value:req.query.postId});
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -21,10 +20,10 @@ export class TodosController {
         }
     }
 
-    async getTodoById(req, res,next) {
+    async getCommentById(req, res, next) {
         try {
-            const todosService = new Service();
-            const resultItem = await todosService.getById('todos',req.params.id);
+            const commentsService = new Service();
+            const resultItem = await commentsService.getById('comments', req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -36,10 +35,10 @@ export class TodosController {
     }
 
 
-    async addTodo(req, res,next) {
+    async addComment(req, res, next) {
         try {
-            const todosService = new Service();
-           await todosService.add('todos',req.body);
+            const commentsService = new Service();
+            await commentsService.add('comments', req.body);
             res.status(200).json({ status: 200 });
         }
         catch (ex) {
@@ -51,11 +50,11 @@ export class TodosController {
     }
 
 
-    async deleteTodo(req, res,next) {
+    async deleteComment(req, res, next) {
         try {
-            const todosService = new Service();
-            await todosService.delete('todos',req.params.id);
-             res.status(200).json({ status: 200 });
+            const commentsService = new Service();
+            await commentsService.delete('comments', req.params.id);
+            res.status(200).json({ status: 200 });
             // console.log("test");
             // console.log(req.params.id);
             // res.status(200).json({ status: 200, data: req.params.id });
@@ -68,11 +67,11 @@ export class TodosController {
         }
     }
 
-    async updateTodo(req, res,next) {
+    async updateComment(req, res, next) {
         try {
-            const todosService = new Service();
-            await todosService.update('todos',req.body,req.params.id);
-             res.status(200).json({ status: 200 })
+            const commentsService = new Service();
+            await commentsService.update('comments', req.body, req.params.id);
+            res.status(200).json({ status: 200 })
             // console.log("test");
             // console.log(req.params.id);
             // console.log(req.body);

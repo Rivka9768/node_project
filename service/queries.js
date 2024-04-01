@@ -1,7 +1,7 @@
 
 
-const getQuery = (table) => {
-    const query = `SELECT * FROM nodeproject.${table} where userId= ?  `;
+const getQuery = (table,param) => {
+    const query = `SELECT * FROM nodeproject.${table} where ${param}= ?  `;
     return query
 }
 

@@ -2,9 +2,9 @@ import { getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery } from "./qu
 import { executeQuery } from './db.js'
 export class Service {
 
-    async get(table,userId) {
-        const query  = getQuery(table);
-        const result = await executeQuery(query,[userId] );
+    async get(table,param) {
+        const query  = getQuery(table,param.key);
+        const result = await executeQuery(query,[param.value] );
         return result;
     }
 
