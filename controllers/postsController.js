@@ -3,7 +3,7 @@
 import { Service } from "../service/services.js";
 export class PostsController {
 
-    async getPostsByUserId(req, res, next) {
+    async getPosts(req, res, next) {
 
         try {
             const postsService = new Service();
