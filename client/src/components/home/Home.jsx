@@ -19,7 +19,6 @@ const Home = () => {
             <header>
                 <nav>
                     <NavLink onClick={logout} to={'/login'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}>Logout </NavLink>
-                    <NavLink to="./albums" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>Albums </NavLink>
                     <NavLink to="./posts" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>Posts </NavLink>
                     <NavLink to="./todos" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>Todos </NavLink>
                     <NavLink to="./info" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>Info </NavLink>
