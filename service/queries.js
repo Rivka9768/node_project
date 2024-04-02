@@ -26,6 +26,11 @@ const updateQuery = (table,columns) => {
     const query = `UPDATE nodeproject.${table} SET ${columnsNames.map((column)=>(column+'=?'))} WHERE (id = ?)`;
     return query
 }
+
+const checkQuery=()=>{
+    const query = `SELECT * FROM nodeproject.registries  where username = ? and password = ?`;
+    return query
+}
 export {
-    getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery
+    getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery
 }

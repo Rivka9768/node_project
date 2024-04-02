@@ -1,5 +1,5 @@
 
-
+///להוריד
 const getUsersQuery = () => {
     const query = `SELECT * FROM nodeproject.users `;
     return query

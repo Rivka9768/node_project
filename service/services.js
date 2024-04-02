@@ -1,4 +1,4 @@
-import { getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery } from "./queries.js"
+import { getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery } from "./queries.js"
 import { executeQuery } from './db.js'
 export class Service {
 
@@ -28,6 +28,12 @@ export class Service {
     async update(table,userItem, userId) {
         const query  = updateQuery(table,userItem);
         const result = await executeQuery(query , [...Object.values(userItem), userId]);
+        return result;
+    }
+
+    async check(userItem) {
+        const query  = checkQuery();
+        const result = await executeQuery(query , [...Object.values(userItem)]);
         return result;
     }
 }
