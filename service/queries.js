@@ -1,6 +1,9 @@
 
-
-const getQuery = (table,param) => {
+const getQuery = (table) => {
+    const query = `SELECT * FROM nodeproject.${table} `;
+    return query
+}
+const getByParamQuery = (table,param) => {
     const query = `SELECT * FROM nodeproject.${table} where ${param}= ?  `;
     return query
 }
@@ -32,5 +35,5 @@ const checkQuery=()=>{
     return query
 }
 export {
-    getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery
+    getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery
 }

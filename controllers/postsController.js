@@ -7,9 +7,13 @@ export class PostsController {
 
         try {
             const postsService = new Service();
-            if (req.query.userId === undefined)
-                throw new Error('illegal request')
-            const resultItems = await postsService.get('posts', {key:'userId',value:req.query.userId});
+            let resultItems=[];
+            if (req.query.userId === undefined){
+                resultItems = await postsService.get('posts');
+            }
+            else{
+                resultItems = await postsService.getByParam('posts', {key:'userId',value:req.query.userId});
+            }
             return res.status(200).json(resultItems);
         }
         catch (ex) {

@@ -1,9 +1,16 @@
-import { getQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery } from "./queries.js"
+import { getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery } from "./queries.js"
 import { executeQuery } from './db.js'
 export class Service {
 
-    async get(table,param) {
-        const query  = getQuery(table,param.key);
+    async get(table) {
+        const query  = getQuery(table);
+        const result = await executeQuery(query );
+        return result;
+    }
+
+
+    async getByParam(table,param) {
+        const query  = getByParamQuery(table,param.key);
         const result = await executeQuery(query,[param.value] );
         return result;
     }

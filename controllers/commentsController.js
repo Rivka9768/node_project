@@ -9,7 +9,7 @@ export class CommentsController {
             const commentsService = new Service();
             if (req.query.postId === undefined)
                 throw new Error('illegal request')
-            const resultItems = await commentsService.get('comments', {key:'postId',value:req.query.postId});
+            const resultItems = await commentsService.getByParam('comments', {key:'postId',value:req.query.postId});
             return res.status(200).json(resultItems);
         }
         catch (ex) {
