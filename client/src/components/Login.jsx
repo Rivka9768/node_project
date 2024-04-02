@@ -41,7 +41,7 @@ const Login = () => {
         fetch(`http://localhost:8080/users?username=${name}`)
             .then(async response => {
                 const data = await response.json();
-                (data===[]) ? setExist(false) :getUserDetails(data[0]) 
+                (data.length==0) ? setExist(false) :getUserDetails(data[0]) 
             })
     }
 const getUserDetails=(user)=>{
