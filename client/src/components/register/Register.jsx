@@ -26,7 +26,8 @@ const Register = () => {
             return
         }
         setInput({ name: data.username, password: data.password })
-        isExist(data.username)
+        isExist(data.username);
+      
     }
 
     return (

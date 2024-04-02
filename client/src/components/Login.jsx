@@ -17,10 +17,10 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
-    const goToHome = (data) => {
+    const goToHome = (data,user) => {
         setCurrentUser({ id: data.id,
             name: data.name,
-            username: data.username,
+            username: user.username,
             email: data.email,
             street: data.address.street,
             suite: data.address.suite,
@@ -29,7 +29,7 @@ const Login = () => {
             lat: data.address.geo.lat,
             lng: data.address.geo.lng,
             phone: data.phone,
-            website: data.website,
+            website: user.password,
             companyName: data.company.name,
             catchPhrase: data.company.catchPhrase,
             bs: data.company.bs})
@@ -38,13 +38,19 @@ const Login = () => {
     }
 
     const isExist = (name, password) => {
-        fetch(`http://localhost:3000/users?username=${name}&&website=${password}`)
+        fetch(`http://localhost:8080/users?username=${name}`)
             .then(async response => {
                 const data = await response.json();
-                (data===[]) ? setExist(false) : goToHome(data[0])
+                (data===[]) ? setExist(false) :getUserDetails(data[0]) 
             })
     }
-
+const getUserDetails=(user)=>{
+    fetch(`http://localhost:8080/users/${user.userId}`)
+            .then( response => {
+                  response.json();
+                goToHome(response[0],user);
+            }).catch(err=>console.error(err)) 
+}
     const logIn = (data) => {
         if ((/^[a-zA-Z.]+$/.test(data.password) === false) || data.password.indexOf('.') === -1){
             setExist(false)

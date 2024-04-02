@@ -28,7 +28,8 @@ const UserDetailes = ({ username, password }) => {
     } = useForm();
 
     const goToHome = (data) => {
-        setCurrentUser({ id: data.id,
+        setCurrentUser({
+            id: data.id,
             name: data.name,
             username: data.username,
             email: data.email,
@@ -39,11 +40,12 @@ const UserDetailes = ({ username, password }) => {
             lat: data.address.geo.lat,
             lng: data.address.geo.lng,
             phone: data.phone,
-            website: data.website,
+            // website: data.website,
             companyName: data.company.name,
             catchPhrase: data.company.catchPhrase,
-            bs: data.company.bs})
-        localStorage.setItem('currentUser', JSON.stringify({ username:username, id:id }));
+            bs: data.company.bs
+        })
+        localStorage.setItem('currentUser', JSON.stringify({ username: username, id: id }));
         navigate(`/home/users/${data.id}`)
     }
 
@@ -51,35 +53,39 @@ const UserDetailes = ({ username, password }) => {
         const user = {
             id: id.toString(),
             name: data.name,
-            username: username ,
-            email: data.email ,
+
+            email: data.email,
             address: {
-                street: data.street ,
-                suite: data.suite ,
-                city: data.city ,
-                zipcode: data.zipcode ,
+                street: data.street,
+                suite: data.suite,
+                city: data.city,
+                zipcode: data.zipcode,
                 geo: {
-                    lat: data.lat ,
-                    lng: data.lng 
+                    lat: data.lat,
+                    lng: data.lng
                 }
             },
-            phone: data.phone ,
-            website: password ,
+            phone: data.phone,
+            // website: password ,
             company: {
-                name: data.companyName ,
-                catchPhrase: data.catchPhrase ,
-                bs: data.bs 
+                name: data.companyName,
+                catchPhrase: data.catchPhrase,
+                bs: data.bs
             }
         };
 
-        fetch('http://localhost:3000/users', {
+        fetch('http://localhost:8080/users', {
             method: 'POST',
             body: JSON.stringify(user),
+        }).then(async response => {
+            const data = await response.json();
+            (!response.ok) ? alert("oops somthing went wrong... please try again!") :
+                fetch('http://localhost:8080/registries/', {//הוספתי בקשת הוספה לטבלה של המשתמש עם סיסמה למרות שאני חושבת שיותר נכון זה לעשות בשרת שהוא מקבל את כל הנתונים והוא מחלק אותם 
+                    method: 'POST',
+                    body: JSON.stringify({ userId: user.id, username: username, password: password })
+                        .then(res => { (!res.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data) }),
+                })
         })
-            .then(async response => {
-                const data = await response.json();
-                (!response.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data)
-            })
     };
 
     return (
@@ -143,7 +149,7 @@ const UserDetailes = ({ username, password }) => {
                     {...register("zipcode", {
                         required: "zipcode is required.",
                         pattern: {
-                            value:/^\d{5}[-\s]?(?:\d{4})?$/ ,
+                            value: /^\d{5}[-\s]?(?:\d{4})?$/,
                             message: "zipcode is not valid."
                         }
                     })} />
