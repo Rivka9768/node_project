@@ -19,25 +19,18 @@ function App() {
     return{
       id: data.id,
       name: data.name,
-      username: data.username,
       email: data.email,
       street: data.address.street,
-      suite: data.address.suite,
       city: data.address.city,
       zipcode: data.address.zipcode,
-      lat: data.address.geo.lat,
-      lng: data.address.geo.lng,
       phone: data.phone,
-      website: data.website,
-      companyName: data.company.name,
-      catchPhrase: data.company.catchPhrase,
-      bs: data.company.bs
+      website: data.website
     }
   }
   useEffect(() => {
    
     const currntUser = JSON.parse(localStorage.getItem("currentUser"))
-    currntUser && fetch(`http://localhost:3000/users/${currntUser.id}`)
+    currntUser && fetch(`http://localhost:8080/users/${currntUser.id}`)
       .then(async response => {
         const data = await response.json() ;
         response.ok && setCurrentUser( ()=>user( data ))
@@ -52,10 +45,6 @@ function App() {
           <Routes >
             <Route path='/' element={<Navigate to={'/login'} />} />
             <Route path='/home/users/:userId' element={<Home />}>
-              <Route path='albums' element={<Layout />} >
-                <Route index element={<Albums />} />
-                <Route path=":albumId/photos" element={<Photos />} />
-              </Route>
               <Route path="posts" element={<Layout />} >
                 <Route index element={<Posts />} />
                 <Route path=":postId/comments" element={<Comments />} />

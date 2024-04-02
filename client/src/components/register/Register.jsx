@@ -15,7 +15,7 @@ const Register = () => {
     } = useForm();
 
     const isExist = (name) => {
-        fetch(`http://localhost:8080/users?username=${name}`)
+        fetch(`http://localhost:8080/user_logins?username=${name}`)
             .then(response => response.json())
             .then(response => (response.length) ? setExist("exist") : setExist("notExist"))
     }
@@ -47,20 +47,12 @@ const Register = () => {
                         <input type="password" name="password" placeholder='password'
                             {...register("password", {
                                 required: "password is required.",
-                                pattern: {
-                                    value:/^[a-zA-Z]+[.]+[a-zA-Z ]+$/ ,
-                                    message: "password is not valid."
-                                }
                             })} />
                         {errors.password ? <p>{errors.password.message}</p>:<br/>}
 
                         <input type="password" name="passwordVerification" placeholder='password verification'
                             {...register("passwordVerification", {
                                 required: "password verification is required.",
-                                pattern: {
-                                    value: /^[a-zA-Z]+[.]+[a-zA-Z ]+$/ ,
-                                    message: "password verification is not valid."
-                                }
                             })} />
                         {errors.passwordVerification ? <p>{errors.passwordVerification.message}</p>:<br/>}
 

@@ -1,7 +1,7 @@
 
 
 import { Service } from "../service/services.js";
-const TABLE='users'
+const TABLE = 'users'
 export class UserController {
 
     // async getUsers(req, res, next) {
@@ -19,10 +19,10 @@ export class UserController {
     //     }
     // }
 
-    async getUserById(req, res,next) {
+    async getUserById(req, res, next) {
         try {
             const usersService = new Service();
-            const resultItem = await usersService.getById(TABLE,req.params.id);
+            const resultItem = await usersService.getById(TABLE, req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -34,11 +34,13 @@ export class UserController {
     }
 
 
-    async addUser(req, res,next) {
+    async addUser(req, res, next) {
         try {
             const usersService = new Service();
-           await usersService.add(TABLE,req.body);
-            res.status(200).json({ status: 200 });
+            const { id, name, email, street, city, zipcode, phone, website, username, password } = req.body;
+            const resultItem = await usersService.add(TABLE, {name, email, street, city, zipcode, phone, website });
+            await usersService.add('user_logins', { id, username, password });
+            res.status(200).json(resultItem);
         }
         catch (ex) {
             const err = {}
@@ -49,11 +51,11 @@ export class UserController {
     }
 
 
-    async deleteUser(req, res,next) {
+    async deleteUser(req, res, next) {
         try {
             const usersService = new Service();
-            await usersService.delete(TABLE,req.params.id);
-             res.status(200).json({ status: 200 });
+            await usersService.delete(TABLE, req.params.id);
+            res.status(200).json({ status: 200 });
             // console.log("test");
             // console.log(req.params.id);
             // res.status(200).json({ status: 200, data: req.params.id });
@@ -66,11 +68,11 @@ export class UserController {
         }
     }
 
-    async updateUser(req, res,next) {
+    async updateUser(req, res, next) {
         try {
             const usersService = new Service();
-            await usersService.update(TABLE,req.body,req.params.id);
-             res.status(200).json({ status: 200 })
+            await usersService.update(TABLE, req.body, req.params.id);
+            res.status(200).json({ status: 200 })
             // console.log("test");
             // console.log(req.params.id);
             // console.log(req.body);

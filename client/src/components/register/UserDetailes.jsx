@@ -6,20 +6,6 @@ import { UserContext } from '../../App'
 const UserDetailes = ({ username, password }) => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useContext(UserContext);
-    let id;
-    useEffect(() => {
-        fetch(`http://localhost:3000/nextIds/users`)
-            .then(async response => {
-                const data = await response.json();
-                if (response.ok) {
-                    id = data.nextId;
-                    fetch(`http://localhost:3000/nextIds/users`, {
-                        method: 'PATCH',
-                        body: JSON.stringify({ nextId: data.nextId + 1 })
-                    });
-                } else alert("opps somthing went wrong...");
-            })
-    }, [])
 
     const {
         register,
@@ -31,47 +17,28 @@ const UserDetailes = ({ username, password }) => {
         setCurrentUser({
             id: data.id,
             name: data.name,
-            username: data.username,
             email: data.email,
             street: data.address.street,
-            suite: data.address.suite,
             city: data.address.city,
             zipcode: data.address.zipcode,
-            lat: data.address.geo.lat,
-            lng: data.address.geo.lng,
             phone: data.phone,
-            // website: data.website,
-            companyName: data.company.name,
-            catchPhrase: data.company.catchPhrase,
-            bs: data.company.bs
+            website: data.website
         })
-        localStorage.setItem('currentUser', JSON.stringify({ username: username, id: id }));
+        localStorage.setItem('currentUser', JSON.stringify({ username: username, id: data.id }));
         navigate(`/home/users/${data.id}`)
     }
 
     const addDetailes = (data) => {
         const user = {
-            id: id.toString(),
             name: data.name,
-
             email: data.email,
-            address: {
-                street: data.street,
-                suite: data.suite,
-                city: data.city,
-                zipcode: data.zipcode,
-                geo: {
-                    lat: data.lat,
-                    lng: data.lng
-                }
-            },
+            street: data.street,
+            city: data.city,
+            zipcode: data.zipcode,
             phone: data.phone,
-            // website: password ,
-            company: {
-                name: data.companyName,
-                catchPhrase: data.catchPhrase,
-                bs: data.bs
-            }
+            website: data.website,
+            username:username,
+            password:password
         };
 
         fetch('http://localhost:8080/users', {
@@ -79,13 +46,7 @@ const UserDetailes = ({ username, password }) => {
             body: JSON.stringify(user),
         }).then(async response => {
             const data = await response.json();
-            (!response.ok) ? alert("oops somthing went wrong... please try again!") :
-                fetch('http://localhost:8080/registries/', {//הוספתי בקשת הוספה לטבלה של המשתמש עם סיסמה למרות שאני חושבת שיותר נכון זה לעשות בשרת שהוא מקבל את כל הנתונים והוא מחלק אותם 
-                    method: 'POST',
-                    body: JSON.stringify({ userId: user.id, username: username, password: password })
-                        .then(res => { (!res.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data) }),
-                })
-        })
+            (!response.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data) })
     };
 
     return (
@@ -125,15 +86,6 @@ const UserDetailes = ({ username, password }) => {
                     })} />
                 {errors.street && <p>{errors.street.message}</p>}
 
-                <input type='text' name="suite" placeholder='suite'
-                    {...register("suite", {
-                        required: "suite is required.",
-                        pattern: {
-                            value: /^[a-zA-Z. - 0-9]+$/,
-                            message: "suite is not valid."
-                        }
-                    })} />
-                {errors.suite && <p>{errors.suite.message}</p>}
 
                 <input type='text' name="city" placeholder='city'
                     {...register("city", {
@@ -155,26 +107,6 @@ const UserDetailes = ({ username, password }) => {
                     })} />
                 {errors.zipcode && <p>{errors.zipcode.message}</p>}
 
-                <label>geo</label>
-                <input type='text' name="lat" placeholder='lat'
-                    {...register("lat", {
-                        required: "lat is required.",
-                        pattern: {
-                            value: /^[0-9 -]+$/,
-                            message: "lat is not valid."
-                        }
-                    })} />
-                {errors.lat && <p>{errors.lat.message}</p>}
-
-                <input type='text' name="lng" placeholder='lng'
-                    {...register("lng", {
-                        required: "lng is required.",
-                        pattern: {
-                            value: /^[0-9-.]+$/,
-                            message: "lng is not valid."
-                        }
-                    })} />
-                {errors.lng && <p>{errors.lng.message}</p>}
 
                 <input type="tel" name="phone" placeholder='phone'
                     {...register("phone", {
@@ -186,36 +118,11 @@ const UserDetailes = ({ username, password }) => {
                     })} />
                 {errors.phone && <p>{errors.phone.message}</p>}
 
-                <label >company</label>
-                <input type='text' name='companyName' placeholder='company name'
-                    {...register("companyName", {
-                        required: "company name is required.",
-                        pattern: {
-                            value: /^[a-zA-Z. -]+$/,
-                            message: "company name is not valid."
-                        }
+                <input type="text" name="website" placeholder='website'
+                    {...register("website", {
+                        required: "website is required.",
                     })} />
-                {errors.companyName && <p>{errors.companyName.message}</p>}
-
-                <input type='text' name='catchPhrase' placeholder='catch phrase'
-                    {...register("catchPhrase", {
-                        required: "catch phrase is required.",
-                        pattern: {
-                            value: /^[a-zA-Z. -]+$/,
-                            message: "catch phrase is not valid."
-                        }
-                    })} />
-                {errors.catchPhrase && <p>{errors.catchPhrase.message}</p>}
-
-                <input type='text' name='bs' placeholder='bs'
-                    {...register("bs", {
-                        required: "bs is required.",
-                        pattern: {
-                            value: /^[a-zA-Z. -]+$/,
-                            message: "bs is not valid."
-                        }
-                    })} />
-                {errors.bs && <p>{errors.email.bs}</p>}
+                {errors.website && <p>{errors.website.message}</p>}
 
                 <input type="submit" value="add detailes" />
             </form>

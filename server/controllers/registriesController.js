@@ -1,6 +1,7 @@
 import { Service } from "../service/services.js";
 
 export class RegistriesController {
+    //post
     async checkRegistries(req, res, next) {
         try {
             const registriesService = new Service();
@@ -14,7 +15,7 @@ export class RegistriesController {
             next(err)
         }
     }
-
+//get
     async getRegistries(req, res, next) {
         try {
             const registriesService = new Service();

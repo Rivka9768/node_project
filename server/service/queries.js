@@ -31,9 +31,11 @@ const updateQuery = (table,columns) => {
 }
 
 const checkQuery=()=>{
-    const query = `SELECT * FROM nodeproject.registries  where username = ? and password = ?`;
+    const query = `SELECT * FROM nodeproject.user_logins  where username = ? and password = ?`;
     return query
 }
+
+
 export {
     getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery
 }
