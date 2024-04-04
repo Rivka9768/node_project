@@ -3,8 +3,8 @@ const UpdatePost = ({ post, getPosts,setIsUpdate }) => {
     const updatePost = (element) => {
         element.preventDefault()
 
-        fetch(`http://localhost:3000/posts/${post.id}`, {
-            method: 'PATCH',
+        fetch(`http://localhost:8080/posts/${post.id}`, {
+            method: 'PUT',
             body: JSON.stringify({ title: element.target[0].value, body: element.target[1].value })
         }).then( response => {
 

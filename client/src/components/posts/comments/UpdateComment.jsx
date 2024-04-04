@@ -3,7 +3,7 @@ const UpdateComment = ({setIsUpdate ,comment, getComments}) => {
     const updateComment = (element) => {
         element.preventDefault()
 
-        fetch(`http://localhost:3000/comments/${comment.id}`, {
+        fetch(`http://localhost:8080/comments/${comment.id}`, {
             method: 'PATCH',
             body: JSON.stringify({ name: element.target[0].value, body: element.target[1].value })
         }).then( response => {

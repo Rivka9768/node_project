@@ -1,17 +1,19 @@
 import express from 'express';
+import cors from 'cors';
 import { usersRouter } from './router/usersRouter.js';
 import { todosRouter } from './router/todosRouter.js';
 import { postsRouter } from './router/postsRouter.js';
 import { commentsRouter } from './router/commentsRouter.js';
-import { registriesRouter } from './router/registriesRouter.js';
+import { user_loginsRouter } from './router/user_loginsRouter.js';
 import {Errors} from './middleware/errors.js'
 const server = express();
+server.use(cors())
 server.use(express.json());
 server.use('/users',usersRouter);
 server.use('/todos',todosRouter);
 server.use('/posts',postsRouter);
 server.use('/comments',commentsRouter);
-server.use('/registries',registriesRouter)
+server.use('/user_logins',user_loginsRouter)
 server.use(Errors);
 
 

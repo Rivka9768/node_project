@@ -17,7 +17,7 @@ const Register = () => {
     const isExist = (name) => {
         fetch(`http://localhost:8080/user_logins?username=${name}`)
             .then(response => response.json())
-            .then(response => (response.length) ? setExist("exist") : setExist("notExist"))
+            .then(response => (response.length) ? setExist("exist") :setExist("notExist"))
     }
 
     const signUp = (data) => {
@@ -60,7 +60,7 @@ const Register = () => {
                     </form>
                 </div>
             }
-            <div>Are you an existing user? <Link style={{textDecoration:'underline'}}to={'/login'}>please login</Link></div>
+            {exist != "notExist"&&<div>Are you an existing user? <Link style={{textDecoration:'underline'}}to={'/login'}>please login</Link></div>}
         </>
     );
 }

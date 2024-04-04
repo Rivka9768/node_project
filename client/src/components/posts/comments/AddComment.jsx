@@ -5,12 +5,12 @@ const AddComment = ({ postId, setIsAdd, getComments }) => {
    const [currentUser, setCurrentUser] = useContext(UserContext);
    let commentId;
    useEffect(() => {
-      fetch(`http://localhost:3000/nextIds/comments`)
+      fetch(`http://localhost:8080/nextIds/comments`)
          .then(async response => {
             const data = await response.json();
             if (response.ok) {
                commentId = data.nextId;
-               fetch(`http://localhost:3000/nextIds/comments`, {
+               fetch(`http://localhost:8080/nextIds/comments`, {
                   method: 'PATCH',
                   body: JSON.stringify({ nextId: data.nextId + 1 })
                });
@@ -30,7 +30,7 @@ const AddComment = ({ postId, setIsAdd, getComments }) => {
          body: element.target[1].value
       }
 
-      fetch(`http://localhost:3000/comments`, {
+      fetch(`http://localhost:8080/comments`, {
          method: 'POST',
          body: JSON.stringify(comment)
       }).then(response => {

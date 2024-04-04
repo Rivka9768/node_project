@@ -14,7 +14,7 @@ const[isUpdate,setIsUpdate]=useState(-1)
 
     const getComments = () => {
         debugger
-        fetch(`http://localhost:3000/comments?postId=${postId}`)
+        fetch(`http://localhost:8080/comments?postId=${postId}`)
         .then(async response => {
             const data = await response.json();
             response.ok ?  setComments(data) : alert("notExist")})
@@ -26,7 +26,7 @@ const[isUpdate,setIsUpdate]=useState(-1)
 
 
     const remove = (commentId) => {
-        fetch(`http://localhost:3000/comments/${commentId}`, {
+        fetch(`http://localhost:8080/comments/${commentId}`, {
           method: 'DELETE'
         })
           .then(response => {

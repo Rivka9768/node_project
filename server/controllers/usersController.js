@@ -37,10 +37,11 @@ export class UserController {
     async addUser(req, res, next) {
         try {
             const usersService = new Service();
-            const { id, name, email, street, city, zipcode, phone, website, username, password } = req.body;
+            const { name, email, street, city, zipcode, phone, website, username, password } = req.body;
             const resultItem = await usersService.add(TABLE, {name, email, street, city, zipcode, phone, website });
-            await usersService.add('user_logins', { id, username, password });
-            res.status(200).json(resultItem);
+            const userId= await resultItem.insertId;
+            await usersService.add('user_logins', { userId, username, password });
+            res.status(200).json(userId);
         }
         catch (ex) {
             const err = {}

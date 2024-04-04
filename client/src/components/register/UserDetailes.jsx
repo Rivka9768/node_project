@@ -18,9 +18,9 @@ const UserDetailes = ({ username, password }) => {
             id: data.id,
             name: data.name,
             email: data.email,
-            street: data.address.street,
-            city: data.address.city,
-            zipcode: data.address.zipcode,
+            street: data.street,
+            city: data.city,
+            zipcode: data.zipcode,
             phone: data.phone,
             website: data.website
         })
@@ -40,10 +40,12 @@ const UserDetailes = ({ username, password }) => {
             username:username,
             password:password
         };
-
         fetch('http://localhost:8080/users', {
             method: 'POST',
             body: JSON.stringify(user),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
         }).then(async response => {
             const data = await response.json();
             (!response.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data) })

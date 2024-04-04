@@ -20,9 +20,9 @@ function App() {
       id: data.id,
       name: data.name,
       email: data.email,
-      street: data.address.street,
-      city: data.address.city,
-      zipcode: data.address.zipcode,
+      street: data.street,
+      city: data.city,
+      zipcode: data.zipcode,
       phone: data.phone,
       website: data.website
     }
