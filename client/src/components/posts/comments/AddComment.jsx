@@ -32,7 +32,10 @@ const AddComment = ({ postId, setIsAdd, getComments }) => {
 
       fetch(`http://localhost:8080/comments`, {
          method: 'POST',
-         body: JSON.stringify(comment)
+         body: JSON.stringify(comment),
+         headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
       }).then(response => {
          response.ok ? setIsAdd(false) : alert("oops somthing went wrong... please try again!")
       })

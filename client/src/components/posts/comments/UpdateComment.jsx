@@ -2,10 +2,12 @@ import React from "react";
 const UpdateComment = ({setIsUpdate ,comment, getComments}) => {
     const updateComment = (element) => {
         element.preventDefault()
-
         fetch(`http://localhost:8080/comments/${comment.id}`, {
             method: 'PATCH',
-            body: JSON.stringify({ name: element.target[0].value, body: element.target[1].value })
+            body: JSON.stringify({ name: element.target[0].value, body: element.target[1].value }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
         }).then( response => {
             response.ok ?( getComments() ,setIsUpdate(-1)) : alert("oops somthing went wrong... please try again!")
         });
