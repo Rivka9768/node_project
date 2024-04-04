@@ -16,7 +16,7 @@ const Posts = () => {
   const [isUpdate, setIsUpdate] = useState(-1);
   const [loading, setLoading] = useState(true)
   const getPosts = () => {
-    fetch(`http://localhost:8080/posts?userId=${currentUser.id}`)
+    fetch(`http://localhost:8080/posts`)
       .then(async response => {
         const data = await response.json();
         response.ok ? (setPosts(data), setAllPosts(data)) : alert("oops somthing went wrong...")

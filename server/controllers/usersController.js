@@ -23,7 +23,7 @@ export class UserController {
         try {
             const usersService = new Service();
             const resultItem = await usersService.getById(TABLE, req.params.id);
-            res.status(200).json({ status: 200, data: resultItem });
+            res.status(200).json( resultItem );
         }
         catch (ex) {
             const err = {}

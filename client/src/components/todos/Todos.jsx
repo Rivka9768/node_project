@@ -12,7 +12,6 @@ import Style from "../loader.module.css"
 const Todos = () => {
 
   const [currentUser, setCurrentUser] = useContext(UserContext);
-  const [exist, setExist] = useState(false);
   const [todos, setTodos] = useState([]);
   let [allTodos, setAllTodos] = useState([])
   const [isUpdate, setIsUpdate] = useState(-1);
@@ -20,12 +19,10 @@ const Todos = () => {
   const [loading, setLoading] = useState(true)
 
   const getTodos = () => {
-    fetch(`http://localhost:3000/todos?userId=${currentUser.id}`)
+    fetch(`http://localhost:8080/todos?userId=${currentUser.id}`)
       .then(async response => {
         const data = await response.json();
-        response.ok &&(
-        setTodos(data),
-        setAllTodos(data))
+          (response.ok) ? (setTodos(data),setAllTodos(data)):alert('oops somthing went wrong...')
       })
   }
 
@@ -37,7 +34,7 @@ const Todos = () => {
   }, [currentUser])
 
   const remove = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
+    fetch(`http://localhost:8080/todos/${id}`, {
       method: 'DELETE'
     })
       .then(response => {
@@ -47,33 +44,31 @@ const Todos = () => {
 
   return (
     <>
-      {!exist ? <AiOutlineLoading3Quarters /> : < >
-      {loading ? <div className={Style.loader}>
+        {loading ? <div className={Style.loader}>
           <div className={Style.circle}></div>
           <div className={Style.circle}></div>
           <div className={Style.circle}></div>
           <div className={Style.circle}></div>
         </div> : < >
-        <button onClick={() => setIsAdd(!isAdd)}>add todo</button>
-        {isAdd && <AddTodo setIsAdd={setIsAdd} getTodos={getTodos} />}
-        <div className="todos_container">
-          <SortTodos todos={todos} setTodos={setTodos} setAllTodos={setAllTodos} />
-          <SearchTodos setTodos={setTodos} allTodos={allTodos} />
-          {todos.map((todo, index) =>
-            <div className="todo_item" key={index}>
-              {isUpdate != index ? <>
-                <Todo todo={todo} />
-              </> :
-                <UpdateTodo setIsUpdate={setIsUpdate} todo={todo} getTodos={getTodos} />}
-              <button className='btnUpdate' onClick={() => setIsUpdate(prevIsUpdate => prevIsUpdate === -1 ? index : -1)}><MdModeEdit /></button>
-              <button className="btnRemove" disabled={isUpdate === index} onClick={() => remove(todo.id)}><MdDelete /></button>
-            </div>
-          )}
-        </div>
+          <button onClick={() => setIsAdd(!isAdd)}>add todo</button>
+          {isAdd && <AddTodo setIsAdd={setIsAdd} getTodos={getTodos} />}
+          <div className="todos_container">
+            <SortTodos todos={todos} setTodos={setTodos} setAllTodos={setAllTodos} />
+            <SearchTodos setTodos={setTodos} allTodos={allTodos} />
+            {todos.map((todo, index) =>
+              <div className="todo_item" key={index}>
+                {isUpdate != index ? <>
+                  <Todo todo={todo} />
+                </> :
+                  <UpdateTodo setIsUpdate={setIsUpdate} todo={todo} getTodos={getTodos} />}
+                <button className='btnUpdate' onClick={() => setIsUpdate(prevIsUpdate => prevIsUpdate === -1 ? index : -1)}><MdModeEdit /></button>
+                <button className="btnRemove" disabled={isUpdate === index} onClick={() => remove(todo.id)}><MdDelete /></button>
+              </div>
+            )}
+          </div>
         </>}
       </>
-      }
-    </>
+
   )
 }
 export default Todos

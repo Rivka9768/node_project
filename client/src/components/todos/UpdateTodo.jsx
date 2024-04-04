@@ -3,7 +3,7 @@ const UpdateTodo = ({ todo, getTodos, setIsUpdate }) => {
 
     const updateTodo = (element) => {
         element.preventDefault()
-        fetch(`http://localhost:3000/todos/${todo.id}`, {
+        fetch(`http://localhost:8080/todos/${todo.id}`, {
             method: 'PATCH',
             body: JSON.stringify({ title: element.target[1].value, completed: element.target[0].checked })
         }).then(response => {

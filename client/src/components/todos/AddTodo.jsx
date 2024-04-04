@@ -6,12 +6,12 @@ const AddTodo = ({ setIsAdd, getTodos }) => {
     let id;
     const [currentUser, setCurrentUser] = useContext(UserContext);
     useEffect(() => {
-        fetch(`http://localhost:3000/nextIds/todos`)
+        fetch(`http://localhost:8080/nextIds/todos`)
             .then(async response => {
                 const data = await response.json();
                 if (response.ok) {
                     id = data.nextId;
-                    fetch(`http://localhost:3000/nextIds/todos`, {
+                    fetch(`http://localhost:8080/nextIds/todos`, {
                         method: 'PATCH',
                         body: JSON.stringify({ nextId: data.nextId + 1 })
                     });
@@ -32,7 +32,7 @@ const AddTodo = ({ setIsAdd, getTodos }) => {
         }
         console.log(todo);
 
-        fetch('http://localhost:3000/todos', {
+        fetch('http://localhost:8080/todos', {
             method: 'POST',
             body: JSON.stringify(todo),
         })

@@ -5,8 +5,8 @@ export class User_loginsController {
     async checkUser_logins(req, res, next) {
         try {
             const user_loginsService = new Service();
-            await user_loginsService.check(req.body);
-            res.status(200).json({ status: 200 });
+            const resultItem = await user_loginsService.check(req.body);
+            res.status(200).json(resultItem);//is it safe to return the data????
         }
         catch (ex) {
             const err = {}
