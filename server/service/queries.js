@@ -26,6 +26,7 @@ const deleteQuery = (table) => {
 
 const updateQuery = (table,columns) => {
     const columnsNames=Object.keys(columns);
+    console.log(columnsNames)
     const query = `UPDATE nodeproject.${table} SET ${columnsNames.map((column)=>(column+'=?'))} WHERE (id = ?)`;
     return query
 }

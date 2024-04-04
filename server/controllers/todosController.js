@@ -71,6 +71,7 @@ export class TodosController {
     async updateTodo(req, res,next) {
         try {
             const todosService = new Service();
+            console.log('req.params.id ',req.params.id)
             await todosService.update('todos',req.body,req.params.id);
              res.status(200).json({ status: 200 })
             // console.log("test");

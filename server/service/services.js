@@ -33,6 +33,7 @@ export class Service {
     }
 
     async update(table,userItem, userId) {
+        console.log( [...Object.values(userItem), userId])
         const query  = updateQuery(table,userItem);
         const result = await executeQuery(query , [...Object.values(userItem), userId]);
         return result;

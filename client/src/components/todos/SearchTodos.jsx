@@ -38,9 +38,10 @@ const SearchTodos = ({ setTodos, allTodos }) => {
         element.target.reset()
         let tempSelectedTodos = [];
         allTodos.forEach((todo) => {
-            if (((values[0].value != "") ? todo.id === values[0].value : true)
+            debugger;
+            if (((values[0].value != "") ? (todo.id).toString() === values[0].value : true)
                 && ((values[1].value != "") ? todo.title === values[1].value : true)
-                && ((values[2].value != null) ? todo.completed === values[2].value : true)
+                && ((values[2].value != null) ? todo.completed == values[2].value : true)
             ) {
                 tempSelectedTodos.push(todo)
             }

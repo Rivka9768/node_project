@@ -8,7 +8,7 @@ todosRouter.get("/:id",todoscontroller.getTodoById)
 todosRouter.get("/", todoscontroller.getTodosByUserId)
 todosRouter.post("/", todoscontroller.addTodo)
 todosRouter.delete("/:id", todoscontroller.deleteTodo)
-todosRouter.put("/:id", todoscontroller.updateTodo)
+todosRouter.patch("/:id", todoscontroller.updateTodo)
 
 export {
     todosRouter
