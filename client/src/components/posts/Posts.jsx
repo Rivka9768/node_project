@@ -4,6 +4,7 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import SearchPosts from "./SearchPosts";
 import { Link } from "react-router-dom";
+import AddPost from "./AddPost";
 import UpdatePost from "./UpdatePost";
 import Style from '../loader.module.css'
 import { UserContext } from '../../App'
@@ -11,7 +12,8 @@ import './posts.css'
 const Posts = () => {
   const [currentUser, setCurrentUser] = useContext(UserContext);
   const [posts, setPosts] = useState([]);
-  const [showBody, setShowBody] = useState(-1)
+  // const [showBody, setShowBody] = useState(-1)
+  const [isAdd,setIsAdd]=useState(false)
   let [allPosts, setAllPosts] = useState([])
   const [isUpdate, setIsUpdate] = useState(-1);
   const [loading, setLoading] = useState(true)
@@ -53,20 +55,24 @@ const Posts = () => {
           <div className={Style.circle}></div>
           <div className={Style.circle}></div>
         </div> : < >
+        <button onClick={() => setIsAdd(!isAdd)}>add post</button>
+            {isAdd && <AddPost setIsAdd={setIsAdd} getPosts={getPosts} />}
           {posts.map((post, index) =>
-            <div className="post_item" style={{ fontWeight: (showBody === index) && 'bold' }} key={index}>
+            <div className="post_item"  key={index}>
               <span>ID: {post.id}</span>
               {(isUpdate != index) ? <>
                 <span>TITLE: {post.title}</span>
-              </> : <UpdatePost post={post} getPosts={getPosts} setIsUpdate={setIsUpdate} />}
-              {showBody === index && <>
                 <span>BODY: {post.body}</span>
-                <button onClick={() => setIsUpdate(prevIsUpdate => prevIsUpdate === -1 ? index : -1)}><MdModeEdit /></button>
+              </> : <UpdatePost post={post} getPosts={getPosts} setIsUpdate={setIsUpdate} />}
+             <>
+              
+                
                 <Link to={`./${post.id}/comments`}>comments</Link>
               </>
-              }
-              <button className="btmShowBody" onClick={() => setShowBody(prevShowBody => prevShowBody === index ? -1 : index)}> {showBody === index ? <FaEyeSlash /> : <FaEye />}</button>
-              <button className="btnRemovePost" disabled={isUpdate === index} onClick={() => remove(post.id)}><MdDelete /></button>
+             
+              {/* <button className="btmShowBody" onClick={() => setShowBody(prevShowBody => prevShowBody === index ? -1 : index)}> {showBody === index ? <FaEyeSlash /> : <FaEye />}</button> */}
+              {currentUser.id===post.userId&&<><button onClick={() => setIsUpdate(prevIsUpdate => prevIsUpdate === -1 ? index : -1)}><MdModeEdit /></button>
+              <button className="btnRemovePost" disabled={isUpdate === index} onClick={() => remove(post.id)}><MdDelete /></button></>}
             </div>
           )}</>}
 

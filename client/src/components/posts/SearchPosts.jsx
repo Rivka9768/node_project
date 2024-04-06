@@ -22,9 +22,10 @@ const SearchPosts = ({ setPosts, allPosts, posts }) => {
             setLoading(false);
         }, 1000);
         let tempPosts = [];
+        debugger
         switch (element.target[0].name) {
             case "id":
-                tempPosts = allPosts.filter(post => (searchValue.label != '' && post.id === element.target[0].value))
+                tempPosts = allPosts.filter(post => (searchValue.label != '' && (post.id).toString() === element.target[0].value))
                 break;
             case "title":
                 tempPosts = allPosts.filter(post => (searchValue.label != '' && post.title === element.target[0].value))

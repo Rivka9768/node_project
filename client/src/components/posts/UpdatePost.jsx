@@ -4,8 +4,11 @@ const UpdatePost = ({ post, getPosts,setIsUpdate }) => {
         element.preventDefault()
 
         fetch(`http://localhost:8080/posts/${post.id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ title: element.target[0].value, body: element.target[1].value })
+            method: 'PATCH',
+            body: JSON.stringify({ title: element.target[0].value, body: element.target[1].value }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
         }).then( response => {
 
             response.ok ?( getPosts() ,setIsUpdate(-1)) : alert("oops somthing went wrong... please try again!")

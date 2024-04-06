@@ -8,7 +8,7 @@ postsRouter.get("/:id",postscontroller.getPostById)
 postsRouter.get("/", postscontroller.getPosts)
 postsRouter.post("/",postscontroller.addPost)
 postsRouter.delete("/:id",postscontroller.deletePost)
-postsRouter.put("/:id",postscontroller.updatePost)
+postsRouter.patch("/:id",postscontroller.updatePost)
 
 export {
     postsRouter

@@ -8,7 +8,7 @@ commentsRouter.get("/:id",commentscontroller.getCommentById)
 commentsRouter.get("/", commentscontroller.getCommentsByPostId)
 commentsRouter.post("/",commentscontroller.addComment)
 commentsRouter.delete("/:id",commentscontroller.deleteComment)
-commentsRouter.put("/:id",commentscontroller.updateComment)
+commentsRouter.patch("/:id",commentscontroller.updateComment)
 
 export {
     commentsRouter

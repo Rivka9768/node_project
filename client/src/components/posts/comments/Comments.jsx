@@ -13,7 +13,6 @@ const Comments = () => {
 const[isUpdate,setIsUpdate]=useState(-1)
 
     const getComments = () => {
-        debugger
         fetch(`http://localhost:8080/comments?postId=${postId}`)
         .then(async response => {
             const data = await response.json();

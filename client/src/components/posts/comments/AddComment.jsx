@@ -1,30 +1,13 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { UserContext } from '../../../App'
 
 const AddComment = ({ postId, setIsAdd, getComments }) => {
    const [currentUser, setCurrentUser] = useContext(UserContext);
-   let commentId;
-   useEffect(() => {
-      fetch(`http://localhost:8080/nextIds/comments`)
-         .then(async response => {
-            const data = await response.json();
-            if (response.ok) {
-               commentId = data.nextId;
-               fetch(`http://localhost:8080/nextIds/comments`, {
-                  method: 'PATCH',
-                  body: JSON.stringify({ nextId: data.nextId + 1 })
-               });
-            } else alert("oops somthng went wrong...");
-         })
-   }, [])
-
-
 
    const addNewComment = (element) => {
       element.preventDefault();
       const comment = {
          postId: postId,
-         id: commentId.toString(),
          name: element.target[0].value,
          email: currentUser.email,
          body: element.target[1].value
