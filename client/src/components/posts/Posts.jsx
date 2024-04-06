@@ -9,6 +9,9 @@ import UpdatePost from "./UpdatePost";
 import Style from '../loader.module.css'
 import { UserContext } from '../../App'
 import './posts.css'
+
+// ?sort=author asc,datepublished desc&count=12
+
 const Posts = () => {
   const [currentUser, setCurrentUser] = useContext(UserContext);
   const [posts, setPosts] = useState([]);
