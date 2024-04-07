@@ -10,7 +10,7 @@ export class Service {
 
 
     async getByParam(table,param) {
-        const query  = getByParamQuery(table,param.key);
+        const query  = getByParamQuery(table,param.key,param.orderBy);
         const result = await executeQuery(query,[param.value] );
         return result;
     }

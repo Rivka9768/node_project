@@ -3,8 +3,8 @@ const getQuery = (table) => {
     const query = `SELECT * FROM nodeproject.${table} `;
     return query
 }
-const getByParamQuery = (table,param) => {
-    const query = `SELECT * FROM nodeproject.${table} where ${param}= ?  `;
+const getByParamQuery = (table,param,orderBy='id') => {
+    const query = `SELECT * FROM nodeproject.${table} where ${param}= ? order by ${orderBy} `;
     return query
 }
 
