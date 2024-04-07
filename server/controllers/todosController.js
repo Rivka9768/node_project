@@ -10,7 +10,7 @@ export class TodosController {
             console.log(req.query.userId); 
             if(req.query.userId===undefined)
                 throw new Error('illegal request')
-            const resultItems = await todosService.getByParam('todos',{key:'userId',value:req.query.userId,orderBy:req.query._sort});
+            const resultItems = await todosService.getByParam('todos',{key:'userId',value:req.query.userId,orderBy:req.query._sort,limit:req.query._limit});
             return res.status(200).json(resultItems);
         }
         catch (ex) {

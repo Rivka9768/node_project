@@ -3,8 +3,8 @@ const getQuery = (table) => {
     const query = `SELECT * FROM nodeproject.${table} `;
     return query
 }
-const getByParamQuery = (table,param,orderBy='id') => {
-    const query = `SELECT * FROM nodeproject.${table} where ${param}= ? order by ${orderBy} `;
+const getByParamQuery = (table,param,orderBy='id',limit=Number.MAX_SAFE_INTEGER) => {
+    const query = `SELECT * FROM nodeproject.${table} where ${param}= ? order by ${orderBy} limit ${limit} `;
     return query
 }
 
