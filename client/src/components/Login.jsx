@@ -34,7 +34,6 @@ const Login = () => {
 
 
     const getUserDetails = (user) => {
-        console.log(user.userId)
         fetch(`http://localhost:8080/users/${user.userId}`)
             .then(async response => {
                 const data = await response.json();

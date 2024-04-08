@@ -39,10 +39,5 @@ export class Service {
         return result;
     }
 
-    async check(userItem) {
-        const query  = checkQuery();
-        const result = await executeQuery(query , [...Object.values(userItem)]);
-        return result;
-    }
 }
 

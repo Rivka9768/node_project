@@ -1,10 +1,10 @@
-import { Service } from "../service/services.js";
+import { LoginService } from "../service/loginService.js";
 
 export class User_loginsController {
     //post
     async checkUser_logins(req, res, next) {
         try {
-            const user_loginsService = new Service();
+            const user_loginsService = new LoginService();
             const resultItem = await user_loginsService.check(req.body);
             res.status(200).json(resultItem);//is it safe to return the data????
         }
