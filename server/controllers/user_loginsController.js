@@ -1,7 +1,6 @@
 
 import { DataService } from "../service/dataService.js";
 import bcrypt from 'bcrypt'
-const SALTROUNDS = 10;
 export class User_loginsController {
     //post
     async checkUser_logins(req, res, next) {
