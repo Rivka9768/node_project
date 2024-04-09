@@ -32,7 +32,8 @@ function App() {
     currentUser && fetch(`http://localhost:8080/users/${currentUser.id}`)
       .then(async response => {
         const data = await response.json() ;
-        response.ok && setCurrentUser( ()=>user( data ))
+        console.log(data)
+        response.ok && setCurrentUser( ()=>user( data[0] ))
       })
   }, []);
 

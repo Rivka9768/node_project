@@ -24,7 +24,7 @@ const UserDetailes = ({ username, password }) => {
             phone: data.phone,
             website: data.website
         })
-        localStorage.setItem('currentUser', JSON.stringify({ username: username, id: data.id }));
+        localStorage.setItem('currentUser', JSON.stringify({ id: data.id }));
         navigate(`/home/users/${userId}`)
     }
 
