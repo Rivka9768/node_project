@@ -1,15 +1,15 @@
 
 const getQuery = (table) => {
-    const query = `SELECT * FROM nodeproject.${table} `;
+    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 `;
     return query
 }
-const getByParamQuery = (table,param,orderBy='id',limit=Number.MAX_SAFE_INTEGER) => {
-    const query = `SELECT * FROM nodeproject.${table} where ${param}= ? order by ${orderBy} limit ${limit} `;
+const getByParamQuery = (table,param,limit=Number.MAX_SAFE_INTEGER) => {
+    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 and ${param}= ? limit ${limit} `;
     return query
 }
 
 const getByIdQuery = (table) => {
-    const query = `SELECT * FROM nodeproject.${table}  where id = ?`;
+    const query = `SELECT * FROM nodeproject.${table}  where ifnull(deactivated,0) = 0 and id = ?`;
     return query
 }
 
@@ -20,7 +20,7 @@ const addQuery = (table,columns) => {
 }
 
 const deleteQuery = (table) => {
-    const query = `DELETE FROM nodeproject.${table} WHERE (id = ?)`;
+    const query = `UPDATE nodeproject.${table} SET deactivated = 1 WHERE (id = ?)`;
     return query
 }
 

@@ -1,12 +1,12 @@
 
 
-import { Service } from "../service/services.js";
+import { DataService } from "../service/dataService.js";
 export class PostsController {
 
     async getPosts(req, res, next) {
 
         try {
-            const postsService = new Service();
+            const postsService = new DataService();
             let resultItems=[];
             if (req.query.userId === undefined){
                 resultItems = await postsService.get('posts');
@@ -26,7 +26,7 @@ export class PostsController {
 
     async getPostById(req, res, next) {
         try {
-            const postsService = new Service();
+            const postsService = new DataService();
             const resultItem = await postsService.getById('posts', req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
@@ -41,7 +41,7 @@ export class PostsController {
 
     async addPost(req, res, next) {
         try {
-            const postsService = new Service();
+            const postsService = new DataService();
             await postsService.add('posts', req.body);
             res.status(200).json({ status: 200 });
         }
@@ -56,7 +56,7 @@ export class PostsController {
 
     async deletePost(req, res, next) {
         try {
-            const postsService = new Service();
+            const postsService = new DataService();
             await postsService.delete('posts', req.params.id);
             res.status(200).json({ status: 200 });
             // console.log("test");
@@ -73,7 +73,7 @@ export class PostsController {
 
     async updatePost(req, res, next) {
         try {
-            const postsService = new Service();
+            const postsService = new DataService();
             await postsService.update('posts', req.body, req.params.id);
             res.status(200).json({ status: 200 })
             // console.log("test");

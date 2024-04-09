@@ -1,12 +1,12 @@
 
 
-import { Service } from "../service/services.js";
+import { DataService } from "../service/dataService.js";
 export class TodosController {
 
     async getTodosByUserId(req, res, next) {
 
         try {
-            const todosService = new Service();
+            const todosService = new DataService();
             console.log(req.query.userId); 
             if(req.query.userId===undefined)
                 throw new Error('illegal request')
@@ -23,7 +23,7 @@ export class TodosController {
 
     async getTodoById(req, res,next) {
         try {
-            const todosService = new Service();
+            const todosService = new DataService();
             const resultItem = await todosService.getById('todos',req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
@@ -38,7 +38,7 @@ export class TodosController {
 
     async addTodo(req, res,next) {
         try {
-            const todosService = new Service();
+            const todosService = new DataService();
            await todosService.add('todos',req.body);
             res.status(200).json({ status: 200 });
         }
@@ -53,7 +53,7 @@ export class TodosController {
 
     async deleteTodo(req, res,next) {
         try {
-            const todosService = new Service();
+            const todosService = new DataService();
             await todosService.delete('todos',req.params.id);
              res.status(200).json({ status: 200 });
             // console.log("test");
@@ -70,7 +70,7 @@ export class TodosController {
 
     async updateTodo(req, res,next) {
         try {
-            const todosService = new Service();
+            const todosService = new DataService();
             console.log('req.params.id ',req.params.id)
             await todosService.update('todos',req.body,req.params.id);
              res.status(200).json({ status: 200 })

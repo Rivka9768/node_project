@@ -1,6 +1,6 @@
 import { getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery } from "./queries.js"
 import { executeQuery } from './db.js'
-export class Service {
+export class DataService {
 
     async get(table) {
         const query  = getQuery(table);

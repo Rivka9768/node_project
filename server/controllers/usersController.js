@@ -1,7 +1,9 @@
 
 
-import { Service } from "../service/services.js";
-const TABLE = 'users'
+import { DataService } from "../service/dataService.js";
+const TABLE = 'users';
+const SALTROUNDS =10;
+import bcrypt from 'bcrypt'
 export class UserController {
 
     // async getUsers(req, res, next) {
@@ -21,7 +23,7 @@ export class UserController {
 
     async getUserById(req, res, next) {
         try {
-            const usersService = new Service();
+            const usersService = new DataService();
             const resultItem = await usersService.getById(TABLE, req.params.id);
             res.status(200).json( resultItem );
         }
@@ -36,11 +38,12 @@ export class UserController {
 
     async addUser(req, res, next) {
         try {
-            const usersService = new Service();
+            const usersService = new DataService();
             const { name, email, street, city, zipcode, phone, website, username, password } = req.body;
             const resultItem = await usersService.add(TABLE, {name, email, street, city, zipcode, phone, website });
             const userId= await resultItem.insertId;
-            await usersService.add('user_logins', { userId, username, password });
+            const pswd= await bcrypt.hash(password, SALTROUNDS);
+            await usersService.add('user_logins', { userId:userId, username:username,password:pswd });
             res.status(200).json(userId);
         }
         catch (ex) {
@@ -54,7 +57,7 @@ export class UserController {
 
     async deleteUser(req, res, next) {
         try {
-            const usersService = new Service();
+            const usersService = new DataService();
             await usersService.delete(TABLE, req.params.id);
             res.status(200).json({ status: 200 });
             // console.log("test");
@@ -71,7 +74,7 @@ export class UserController {
 
     async updateUser(req, res, next) {
         try {
-            const usersService = new Service();
+            const usersService = new DataService();
             await usersService.update(TABLE, req.body, req.params.id);
             res.status(200).json({ status: 200 })
             // console.log("test");
@@ -87,7 +90,9 @@ export class UserController {
         }
     }
 
-
+    // async getHashedPassword(clearText) {
+    //     return await bcrypt.hash(clearText, SALTROUNDS);
+    // }
 
 
 }

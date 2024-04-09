@@ -13,9 +13,9 @@ const UserDetailes = ({ username, password }) => {
         formState: { errors }
     } = useForm();
 
-    const goToHome = (data) => {
+    const goToHome = (userId,data) => {
         setCurrentUser({
-            id: data.id,
+            id: userId,
             name: data.name,
             email: data.email,
             street: data.street,
@@ -25,7 +25,7 @@ const UserDetailes = ({ username, password }) => {
             website: data.website
         })
         localStorage.setItem('currentUser', JSON.stringify({ username: username, id: data.id }));
-        navigate(`/home/users/${data.id}`)
+        navigate(`/home/users/${userId}`)
     }
 
     const addDetailes = (data) => {
@@ -47,8 +47,8 @@ const UserDetailes = ({ username, password }) => {
                 'Content-type': 'application/json; charset=UTF-8',
               },
         }).then(async response => {
-            const data = await response.json();
-            (!response.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(data) })
+            const userId = await response.json();
+            (!response.ok) ? alert("oops somthing went wrong... please try again!") : goToHome(userId,data) })
     };
 
     return (

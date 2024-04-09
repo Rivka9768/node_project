@@ -33,8 +33,8 @@ const Login = () => {
     }
 
 
-    const getUserDetails = (user) => {
-        fetch(`http://localhost:8080/users/${user.userId}`)
+    const getUserDetails = (userId) => {
+        fetch(`http://localhost:8080/users/${userId}`)
             .then(async response => {
                 const data = await response.json();
                 goToHome(data[0])
@@ -52,8 +52,9 @@ const Login = () => {
         }
         )
             .then(async response => {
-                const data = await response.json();//is it safe to get the data????
-                (data.length == 0) ? setExist(false) : getUserDetails(data[0])
+                const userId = await response.json();//is it safe to get the data????
+                console.log(userId);
+                (userId==false) ? setExist(false) : getUserDetails(userId)
             })
     }
 
