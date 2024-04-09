@@ -19,9 +19,9 @@ const AddPost = ({ setIsAdd, getPosts }) => {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         }).then(response => {
-            response.ok ? setIsAdd(false) : alert("oops somthing went wrong... please try again!")
+            response.ok ? (setIsAdd(false),getPosts()) : alert("oops somthing went wrong... please try again!")
         })
-        getPosts();
+        
     }
 
 
