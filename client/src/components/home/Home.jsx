@@ -11,8 +11,8 @@ const Home = () => {
         localStorage.removeItem("currentUser");
         window.history.replaceState(null, null, '/');
     }
-    if (userId != currentUser.id)
-        navigate('/error')
+    // if (userId != currentUser.id)
+    //     navigate('/error')
     return (
         <>
 
