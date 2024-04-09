@@ -53,7 +53,7 @@ const Todos = () => {
           <button onClick={() => setIsAdd(!isAdd)}>add todo</button>
           {isAdd && <AddTodo setIsAdd={setIsAdd} getTodos={getTodos} />}
           <div className="todos_container">
-            <SortTodos todos={todos} setTodos={setTodos} setAllTodos={setAllTodos} />
+            <SortTodos todos={todos} setTodos={setTodos} allTodos={allTodos} setAllTodos={setAllTodos} />
             <SearchTodos setTodos={setTodos} allTodos={allTodos} />
             {todos.map((todo, index) =>
               <div className="todo_item" key={index}>

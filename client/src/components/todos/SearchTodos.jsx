@@ -16,10 +16,11 @@ const SearchTodos = ({ setTodos, allTodos }) => {
 
     const selectOption = (e) => {
         setSearchValues(e)
-        e.length === 0 && setTodos(allTodos)
+        debugger
+        e.length === 0 && setTodos(allTodos) 
     }
 
-    
+
     const searchByOption = (element) => {
         element.preventDefault();
         let values = [{ type: "id", value: "" }, { type: "title", value: "" }, { type: "completed", value: null }];
