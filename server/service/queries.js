@@ -1,10 +1,10 @@
 
-const getQuery = (table) => {
-    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 `;
+const getQuery = (table,orderBy,limit) => {
+    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 ${orderBy?'order by '+ orderBy:''} ${limit?'limit '+ limit:''} `;
     return query
 }
-const getByParamQuery = (table,param,limit=Number.MAX_SAFE_INTEGER) => {
-    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 and ${param}= ? limit ${limit} `;
+const getByParamQuery = (table,param,orderBy,limit) => {
+    const query = `SELECT * FROM nodeproject.${table} where ifnull(deactivated,0) = 0 and ${param}= ? ${orderBy?'order by '+ orderBy:''} ${limit?'limit '+ limit:''} `;
     return query
 }
 

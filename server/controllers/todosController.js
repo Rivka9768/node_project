@@ -4,7 +4,7 @@ import { DataService } from "../service/dataService.js";
 export class TodosController {
 
     async getTodosByUserId(req, res, next) {
-
+        console.log("jhfghgjk")
         try {
             const todosService = new DataService();
             console.log(req.query.userId); 
