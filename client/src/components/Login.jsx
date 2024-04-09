@@ -53,7 +53,6 @@ const Login = () => {
         )
             .then(async response => {
                 const userId = await response.json();//is it safe to get the data????
-                console.log(userId);
                 (userId==false) ? setExist(false) : getUserDetails(userId)
             })
     }

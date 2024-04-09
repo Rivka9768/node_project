@@ -17,7 +17,6 @@ const AddTodo = ({ setIsAdd, getTodos }) => {
             // completed: element.target[1].checked
             completed: false
         }
-        console.log(todo);
 
         fetch('http://localhost:8080/todos', {
             method: 'POST',

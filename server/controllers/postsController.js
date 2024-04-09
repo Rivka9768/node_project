@@ -59,9 +59,6 @@ export class PostsController {
             const postsService = new DataService();
             await postsService.delete('posts', req.params.id);
             res.status(200).json({ status: 200 });
-            // console.log("test");
-            // console.log(req.params.id);
-            // res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}
@@ -76,10 +73,6 @@ export class PostsController {
             const postsService = new DataService();
             await postsService.update('posts', req.body, req.params.id);
             res.status(200).json({ status: 200 })
-            // console.log("test");
-            // console.log(req.params.id);
-            // console.log(req.body);
-            // res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}

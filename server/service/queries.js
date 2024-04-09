@@ -26,17 +26,11 @@ const deleteQuery = (table) => {
 
 const updateQuery = (table,columns) => {
     const columnsNames=Object.keys(columns);
-    console.log(columnsNames)
     const query = `UPDATE nodeproject.${table} SET ${columnsNames.map((column)=>(column+'=?'))} WHERE (id = ?)`;
-    return query
-}
-
-const checkQuery=()=>{
-    const query = `SELECT userId FROM nodeproject.user_logins  where username = ? and password = ?`;
     return query
 }
 
 
 export {
-    getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery
+    getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery
 }

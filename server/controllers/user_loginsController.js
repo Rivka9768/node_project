@@ -15,7 +15,7 @@ export class User_loginsController {
                     res.status(200).json(false); 
             }))
             
-            : (console.log("gdszfghjgcx"),res.status(200).json(false));
+            : res.status(200).json(false);
         }
         catch (ex) {
             const err = {}

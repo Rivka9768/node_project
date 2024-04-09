@@ -1,4 +1,4 @@
-import { getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery,checkQuery } from "./queries.js"
+import { getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQuery } from "./queries.js"
 import { executeQuery } from './db.js'
 export class DataService {
 
@@ -33,7 +33,6 @@ export class DataService {
     }
 
     async update(table,userItem, userId) {
-        console.log( [...Object.values(userItem), userId])
         const query  = updateQuery(table,userItem);
         const result = await executeQuery(query , [...Object.values(userItem), userId]);
         return result;

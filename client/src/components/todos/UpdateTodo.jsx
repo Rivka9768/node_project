@@ -2,8 +2,7 @@ import React from "react";
 const UpdateTodo = ({ todo, getTodos, setIsUpdate }) => {
 
     const updateTodo = (element) => {
-        element.preventDefault()
-        console.log({ title: element.target[1].value, completed: element.target[0].checked })
+        element.preventDefault();
         fetch(`http://localhost:8080/todos/${todo.id}`, {
             method: 'PATCH',
             body: JSON.stringify({ title: element.target[1].value, completed: element.target[0].checked }),

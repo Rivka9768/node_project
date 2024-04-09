@@ -5,7 +5,6 @@ const AddPost = ({ setIsAdd, getPosts }) => {
     const [currentUser, setCurrentUser] = useContext(UserContext);
 
     const addNewPost = (element) => {
-        console.log(currentUser.id)
         element.preventDefault();
         const post = {
             userId: currentUser.id,

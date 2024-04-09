@@ -55,9 +55,6 @@ export class CommentsController {
             const commentsService = new DataService();
             await commentsService.delete('comments', req.params.id);
             res.status(200).json({ status: 200 });
-            // console.log("test");
-            // console.log(req.params.id);
-            // res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}
@@ -72,10 +69,6 @@ export class CommentsController {
             const commentsService = new DataService();
             await commentsService.update('comments', req.body, req.params.id);
             res.status(200).json({ status: 200 })
-            // console.log("test");
-            // console.log(req.params.id);
-            // console.log(req.body);
-            // res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}
