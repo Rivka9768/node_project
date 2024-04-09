@@ -17,8 +17,9 @@ const SearchTodos = ({ setTodos, allTodos }) => {
     const selectOption = (e) => {
         setSearchValues(e)
         e.length === 0 && setTodos(allTodos)
-
     }
+
+    
     const searchByOption = (element) => {
         element.preventDefault();
         let values = [{ type: "id", value: "" }, { type: "title", value: "" }, { type: "completed", value: null }];
@@ -38,7 +39,6 @@ const SearchTodos = ({ setTodos, allTodos }) => {
         element.target.reset()
         let tempSelectedTodos = [];
         allTodos.forEach((todo) => {
-            debugger;
             if (((values[0].value != "") ? (todo.id).toString() === values[0].value : true)
                 && ((values[1].value != "") ? todo.title === values[1].value : true)
                 && ((values[2].value != null) ? todo.completed == values[2].value : true)
