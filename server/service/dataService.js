@@ -2,8 +2,8 @@ import { getQuery,getByParamQuery, getByIdQuery, addQuery, deleteQuery, updateQu
 import { executeQuery } from './db.js'
 export class DataService {
 
-    async get(table) {
-        const query  = getQuery(table);
+    async get(table,param) {
+        const query  = getQuery(table,param.orderBy,param.limit);
         const result = await executeQuery(query );
         return result;
     }

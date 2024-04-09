@@ -1,5 +1,6 @@
 
 
+import { query } from "express";
 import { DataService } from "../service/dataService.js";
 export class PostsController {
 
@@ -9,10 +10,10 @@ export class PostsController {
             const postsService = new DataService();
             let resultItems=[];
             if (req.query.userId === undefined){
-                resultItems = await postsService.get('posts');
+                resultItems = await postsService.get('posts',{orderBy:req.query._sort,limit:req.query._limit});
             }
             else{
-                resultItems = await postsService.getByParam('posts', {key:'userId',value:req.query.userId});
+                resultItems = await postsService.getByParam('posts', {key:'userId',value:req.query.userId,orderBy:req.query._sort,limit:req.query._limit});
             }
             return res.status(200).json(resultItems);
         }
